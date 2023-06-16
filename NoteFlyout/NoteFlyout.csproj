@@ -37,7 +37,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
-		<PackageReference Include="Get.WinUI.OutOfBoundsFlyout" Version="1.0.0" />
+		<PackageReference Include="Get.WinUI.OutOfBoundsFlyout" Version="1.0.3" />
 		<PackageReference Include="Microsoft.Windows.CsWin32" Version="0.3.2-beta">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

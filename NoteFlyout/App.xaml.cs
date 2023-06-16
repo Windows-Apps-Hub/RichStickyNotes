@@ -48,7 +48,7 @@ public partial class App : Application
     void SetupRealFlyout()
     {
         WindowsSystemDispatcherQueueHelper.EnsureWindowsSystemDispatcherQueueController();
-        //OutOfBoundsFlyoutSystem.EnsureHost();
+        OutOfBoundsFlyoutSystem.EnsureSystemActivated();
         NotifyIcon trayIcon = new()
         {
             Icon =

@@ -1,4 +1,5 @@
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using System;
 using System.Diagnostics;
@@ -47,5 +48,9 @@ namespace StickyNote
         {
             NoteEditFrame.Navigate(typeof(NoteEditPage), note);
         }
+    }
+    class MyMenuFlyoutItem : MenuFlyoutItem
+    {
+
     }
 }
