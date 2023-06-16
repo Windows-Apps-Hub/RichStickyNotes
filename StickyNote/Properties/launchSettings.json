@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "StickyNote (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "StickyNote (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

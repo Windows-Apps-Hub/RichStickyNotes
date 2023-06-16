@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPresenter
+    x:Class="WAH.NoteSystem.UI.Controls.TagPresenter"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tags="using:WAH.NoteSystem.Core.Tags"
+    xmlns:helpers="using:WAH.NoteSystem.UI.Helpers"
+    mc:Ignorable="d"
+    HorizontalContentAlignment="Left"
+>
+    <ContentPresenter.Transitions>
+        <TransitionCollection>
+            <RepositionThemeTransition />
+            <EntranceThemeTransition IsStaggeringEnabled="True" />
+        </TransitionCollection>
+    </ContentPresenter.Transitions>
+    <ContentPresenter.ContentTemplate>
+        <DataTemplate x:DataType="tags:Tag">
+            <Border BorderThickness="2" Padding="5,0.5" CornerRadius="8">
+                <Border.Resources>
+                    <SolidColorBrush x:Key="TagBrush" Color="{x:Bind Color, Mode=OneWay}" />
+                </Border.Resources>
+                <Border.BorderBrush>
+                    <SolidColorBrush Color="{x:Bind Color, Mode=OneWay}" />
+                </Border.BorderBrush>
+                <StackPanel Orientation="Horizontal" Spacing="4">
+                    <helpers:SymbolExFontIcon
+                        SymbolEx="{x:Bind Icon, Mode=OneWay}"
+                        VerticalAlignment="Center"
+                        Foreground="{StaticResource TagBrush}"
+                        FontSize="11"
+                    />
+                    <TextBlock Text="{x:Bind Name, Mode=OneWay}" FontSize="11" Foreground="{StaticResource TagBrush}">
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+    </ContentPresenter.ContentTemplate>
+</ContentPresenter>

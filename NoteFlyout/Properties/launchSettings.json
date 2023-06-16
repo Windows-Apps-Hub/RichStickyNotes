@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "NoteFlyout (Package)": {
+      "commandName": "MsixPackage",
+      "nativeDebugging": true
+    },
+    "NoteFlyout (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

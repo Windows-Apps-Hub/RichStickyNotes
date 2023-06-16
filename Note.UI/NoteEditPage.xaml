@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="WAH.NoteSystem.UI.NoteEditPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tags="using:WAH.NoteSystem.Core.Tags"
+    xmlns:controls="using:WAH.NoteSystem.UI.Controls"
+    xmlns:helpers="using:WAH.NoteSystem.UI.Helpers"
+    xmlns:local="using:WAH.NoteSystem.UI"
+    mc:Ignorable="d"
+>
+    <Page.Resources>
+        <local:Null2TransparentConverter x:Key="Null2TransparentConverter"/>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Padding="8">
+            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal"  VerticalAlignment="Center" Spacing="8">
+                <Button Padding="5" VerticalAlignment="Center" Command="{x:Bind NavigateBackCommand}" Visibility="{x:Bind BackButtonVisibility}">
+                    <SymbolIcon>Back</SymbolIcon>
+                </Button>
+                <TextBox MaxWidth="150" Padding="10,5" Text="{x:Bind Note.Name, Mode=TwoWay}" VerticalAlignment="Center" PlaceholderText="Note Title"/>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Spacing="8"  VerticalAlignment="Center">
+                <ScrollViewer MaxWidth="300" HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Auto" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <ItemsControl ItemsSource="{x:Bind Note.Tags, Mode=OneWay}"  VerticalAlignment="Center">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Spacing="8" Orientation="Horizontal">
+                                        <StackPanel.ChildrenTransitions>
+                                            <TransitionCollection>
+                                                <EntranceThemeTransition IsStaggeringEnabled="True" />
+                                            </TransitionCollection>
+                                        </StackPanel.ChildrenTransitions>
+                                    </StackPanel>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="tags:Tag">
+                                    <controls:TagPresenter NoteTag="{x:Bind}"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </ScrollViewer>
+                <Button Padding="5" VerticalAlignment="Center">
+                    <SymbolIcon>Tag</SymbolIcon>
+                    <Button.Flyout>
+                        <Flyout Placement="Bottom">
+                            <controls:TagEditorFlyoutContent Note="{x:Bind Note}"/>
+                        </Flyout>
+                    </Button.Flyout>
+                </Button>
+                <Button Padding="5"  VerticalAlignment="Center" Command="{x:Bind SaveCommand}">
+                    <SymbolIcon>Save</SymbolIcon>
+                </Button>
+                <Button Padding="5"  VerticalAlignment="Center" Command="{x:Bind SaveCommand}">
+                    <SymbolIcon Symbol="More"/>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" VerticalScrollMode="Auto" HorizontalScrollBarVisibility="Auto" HorizontalScrollMode="Auto" MinZoomFactor="0.333" MaxZoomFactor="3" ZoomMode="Enabled">
+                <controls:RichEditBoxEx Margin="0,0,0,400" AcceptsReturn="True" TabIndex="0" x:Name="EditorTextBox" TextChanged="EditorTextBox_TextChanged" Style="{StaticResource DefaultRichEditBoxStyle}"
+                    ScrollViewer.HorizontalScrollMode="Disabled"
+                    ScrollViewer.VerticalScrollMode="Disabled"
+                    ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                    ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Foreground="White"
+                    FontSize="32">
+                    <controls:RichEditBoxEx.Resources>
+                        <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="Transparent"/>
+                        <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="Transparent"/>
+                    </controls:RichEditBoxEx.Resources>
+                </controls:RichEditBoxEx>
+            </ScrollViewer>
+            <FlyoutPresenter
+                MaxWidth="10000" MaxHeight="10000" MinWidth="0" MinHeight="0"
+                VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                Margin="48"
+                Padding="12"
+            >
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <Button
+                        Padding="5"
+                        Content="{helpers:SymbolExIcon Symbol=Undo}"
+                        IsEnabled="{x:Bind EditorTextBox.CanUndo, Mode=OneWay}"
+                        Command="{x:Bind EditorTextBox.UndoCommand}"
+                        Click="FocusEditBox"
+                    />
+                    <Button
+                        Padding="5"
+                        Content="{helpers:SymbolExIcon Symbol=Redo}"
+                        IsEnabled="{x:Bind EditorTextBox.CanRedo, Mode=OneWay}"
+                        Command="{x:Bind EditorTextBox.RedoCommand}"
+                        Click="FocusEditBox"
+                    />
+                    <AppBarSeparator Padding="0,4"/>
+                    <Button
+                        Padding="5"
+                        Content="{helpers:SymbolExIcon Symbol=Cut}"
+                        IsEnabled="{x:Bind EditorTextBox.CanCopy, Mode=OneWay}"
+                        Command="{x:Bind EditorTextBox.CutCommand}"
+                        Click="FocusEditBox"
+                    />
+                    <Button
+                        Padding="5"
+                        Content="{helpers:SymbolExIcon Symbol=Copy}"
+                        IsEnabled="{x:Bind EditorTextBox.CanCopy, Mode=OneWay}"
+                        Command="{x:Bind EditorTextBox.CopyCommand}"
+                        Click="FocusEditBox"
+                    />
+                    <Button
+                        Padding="5"
+                        Content="{helpers:SymbolExIcon Symbol=Paste}"
+                        IsEnabled="{x:Bind EditorTextBox.CanPaste, Mode=OneWay}"
+                        Command="{x:Bind EditorTextBox.DoPasteCommand}"
+                        Click="FocusEditBox"
+                    />
+                    <AppBarSeparator Padding="0,4"/>
+                    <controls:ToggleButtonEx
+                        Padding="5"
+                        FormatEffect="{x:Bind EditorTextBox.SelectionBold, Mode=TwoWay}"
+                        Content="{helpers:SymbolExIcon Symbol=Bold}"
+                        Click="FocusEditBox"
+                    />
+                    <controls:ToggleButtonEx
+                        Padding="5"
+                        FormatEffect="{x:Bind EditorTextBox.SelectionItalic, Mode=TwoWay}"
+                        Content="{helpers:SymbolExIcon Symbol=Italic}"
+                        Click="FocusEditBox"
+                    />
+                    <controls:ToggleButtonEx
+                        Padding="5"
+                        FormatEffect="{x:Bind EditorTextBox.SelectionUnderline, Mode=TwoWay}"
+                        Content="{helpers:SymbolExIcon Symbol=Underline}"
+                        Click="FocusEditBox"
+                    />
+                    <controls:ToggleButtonEx
+                        Padding="5"
+                        FormatEffect="{x:Bind EditorTextBox.SelectionStrikethrough, Mode=TwoWay}"
+                        Content="{helpers:SymbolExIcon SymbolEx=Strikethrough}"
+                        Click="FocusEditBox"
+                    />
+                    <Button
+                        Padding="5"
+                        Click="FocusEditBox"
+                    >
+                        <Grid>
+                            <SymbolIcon Symbol="{helpers:SymbolEx SymbolEx=OverwriteWordsFillKorean}" RenderTransformOrigin="0.5,0">
+                                <SymbolIcon.Foreground>
+                                    <SolidColorBrush Color="{x:Bind EditorTextBox.SelectionForegroundColor, Mode=OneWay, Converter={StaticResource Null2TransparentConverter}}" />
+                                </SymbolIcon.Foreground>
+                                <SymbolIcon.RenderTransform>
+                                    <CompositeTransform TranslateY="7" ScaleX="0.7" ScaleY="1"/>
+                                </SymbolIcon.RenderTransform>
+                            </SymbolIcon>
+                            <SymbolIcon Symbol="FontColor"/>
+                        </Grid>
+                        <Button.Flyout>
+                            <Flyout>
+                                <controls:ColorPickerEx ColorNullable="{x:Bind EditorTextBox.SelectionForegroundColor, Mode=TwoWay}"/>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
+                    <controls:ToggleButtonEx
+                        Padding="5"
+                        FormatEffect="{x:Bind EditorTextBox.SelectionSuperscript, Mode=TwoWay}"
+                        Click="FocusEditBox"
+                    >
+                        <Grid>
+                            <SymbolIcon Symbol="{helpers:SymbolEx SymbolEx=Dial2}" RenderTransformOrigin="1,0">
+                                <SymbolIcon.RenderTransform>
+                                    <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
+                                </SymbolIcon.RenderTransform>
+                            </SymbolIcon>
+                            <TextBlock Text="&#032;X" VerticalAlignment="Center"/>
+                        </Grid>
+                    </controls:ToggleButtonEx>
+                    <controls:ToggleButtonEx
+                        Padding="5"
+                        FormatEffect="{x:Bind EditorTextBox.SelectionSubscript, Mode=TwoWay}"
+                        Click="FocusEditBox"
+                    >
+                        <Grid>
+                            <SymbolIcon Symbol="{helpers:SymbolEx SymbolEx=Dial2}" RenderTransformOrigin="1,1">
+                                <SymbolIcon.RenderTransform>
+                                    <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
+                                </SymbolIcon.RenderTransform>
+                            </SymbolIcon>
+                            <TextBlock Text="&#032;X" VerticalAlignment="Center"/>
+                        </Grid>
+                    </controls:ToggleButtonEx>
+                    <AppBarSeparator Padding="0,4"/>
+                    <controls:ToggleButtonEx
+                        Padding="5"
+                        FormatEffect="{x:Bind EditorTextBox.SelectionBulletList, Mode=TwoWay}"
+                        Content="{helpers:SymbolExIcon SymbolEx=BulletedList}"
+                        Click="FocusEditBox"
+                    />
+                    <controls:ToggleButtonEx
+                        Padding="5"
+                        FormatEffect="{x:Bind EditorTextBox.SelectionNumberedList, Mode=TwoWay}"
+                        Click="FocusEditBox"
+                    >
+                        <Grid>
+                            <TextBlock Text="1" RenderTransformOrigin="0,0">
+                                <TextBlock.RenderTransform>
+                                    <ScaleTransform ScaleX="0.4" ScaleY="0.4"/>
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+                            <TextBlock Text="2" RenderTransformOrigin="0,0.448">
+                                <TextBlock.RenderTransform>
+                                    <ScaleTransform ScaleX="0.4" ScaleY="0.4"/>
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+                            <TextBlock Text="3" RenderTransformOrigin="0,0.95">
+                                <TextBlock.RenderTransform>
+                                    <ScaleTransform ScaleX="0.4" ScaleY="0.4"/>
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+                            <SymbolIcon Symbol="GlobalNavigationButton" RenderTransformOrigin="1,0.5">
+                                <SymbolIcon.RenderTransform>
+                                    <ScaleTransform ScaleX="0.7" ScaleY="1"/>
+                                </SymbolIcon.RenderTransform>
+                            </SymbolIcon>
+                        </Grid>
+                    </controls:ToggleButtonEx>
+                    <AppBarSeparator Padding="0,4"/>
+                    <Button
+                        Padding="5"
+                        Content="{helpers:SymbolExIcon SymbolEx=Link}"
+                        IsEnabled="{x:Bind EditorTextBox.CanInsertLink, Mode=OneWay}"
+                        Command="{x:Bind EditorTextBox.RequestSetLinkForCurrentSelectionCommand}"
+                        Click="FocusEditBox"
+                    />
+                    <Button
+                        Padding="5"
+                        Content="{helpers:SymbolExIcon SymbolEx=TiltDown}"
+                        Command="{x:Bind EditorTextBox.InsertTableCommand}"
+                        Click="FocusEditBox"
+                    />
+                    <Button
+                        Padding="5"
+                        Content="{helpers:SymbolExIcon SymbolEx=Picture}"
+                        Command="{x:Bind EditorTextBox.PromptForImageAndInsertPhotoCommand}"
+                        Click="FocusEditBox"
+                    />
+                </StackPanel>
+            </FlyoutPresenter>
+        </Grid>
+    </Grid>
+</Page>

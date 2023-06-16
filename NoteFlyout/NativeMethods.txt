@@ -1,0 +1,4 @@
+﻿Shell_NotifyIcon
+
+RegisterWindowMessage
+DefWindowProc
