@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net7.0-windows10.0.19041.0</TargetFramework>
+		<TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+		<RootNamespace>WAH.NoteSystem.UI</RootNamespace>
+		<RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
+		<UseWinUI>true</UseWinUI>
+		<LangVersion>11</LangVersion>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="EasyCSharp.Generator" Version="1.1.0" />
+		<PackageReference Include="Get.XAMLTools.Generator" Version="1.0.4">
+			<ExcludeAssets>all</ExcludeAssets>
+			<IncludeAssets>none</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.3.230724000" />
+		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.756" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
+		<PackageReference Include="WinWrapper.Windowing" Version="2.0.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Note.Core\WAH.NoteSystem.Core.WinAppSDK.csproj" />
+		<ProjectReference Include="D:\Programming\VS\Get.TextEditor\Get.RichTextKit.Paragraphs\Get.RichTextKit.Editor.Paragraphs.csproj" />
+		<ProjectReference Include="D:\Programming\VS\Get.TextEditor\Get.TextEditor.WinUI\Get.TextEditor.WinUI.csproj" />
+		<ProjectReference Include="D:\Programming\VS\Get.TextEditor\MethodInjector\MethodInjector.csproj" />
+		<ProjectReference Include="D:\Programming\VS\Get.TextEditor\RichTextKit\Get.RichTextKit\Get.RichTextKit.csproj" />
+	</ItemGroup>
+
+	<Import Project="..\WAH.NoteSystem.UI\WAH.NoteSystem.UI.projitems" Label="Shared" />
+</Project>

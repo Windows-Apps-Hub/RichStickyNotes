@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="WAH.NoteSystem.UI.NoteEditPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tags="using:WAH.NoteSystem.Core.Tags"
+    xmlns:controls="using:WAH.NoteSystem.UI.Controls"
+    xmlns:editorcontrols="using:WAH.NoteSystem.UI.Editor.Controls"
+    xmlns:helpers="using:WAH.NoteSystem.UI.Helpers"
+    xmlns:local="using:WAH.NoteSystem.UI"
+    xmlns:getTextEdit="using:Get.TextEditor"
+    mc:Ignorable="d"
+>
+    <Page.Resources>
+        <local:Null2TransparentConverter x:Key="Null2TransparentConverter"/>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Padding="8">
+            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal"  VerticalAlignment="Center" Spacing="8">
+                <Button Padding="5" VerticalAlignment="Center" Command="{x:Bind NavigateBackCommand}" Visibility="{x:Bind BackButtonVisibility}">
+                    <SymbolIcon>Back</SymbolIcon>
+                </Button>
+                <TextBox MaxWidth="150" Padding="10,5" Text="{x:Bind Note.Name, Mode=TwoWay}" VerticalAlignment="Center" PlaceholderText="Note Title"/>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Spacing="8"  VerticalAlignment="Center">
+                <ScrollViewer MaxWidth="300" HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Auto" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <ItemsControl ItemsSource="{x:Bind Note.Tags, Mode=OneWay}"  VerticalAlignment="Center">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Spacing="8" Orientation="Horizontal">
+                                        <StackPanel.ChildrenTransitions>
+                                            <TransitionCollection>
+                                                <EntranceThemeTransition IsStaggeringEnabled="True" />
+                                            </TransitionCollection>
+                                        </StackPanel.ChildrenTransitions>
+                                    </StackPanel>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="tags:Tag">
+                                    <controls:TagPresenter NoteTag="{x:Bind}"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </ScrollViewer>
+                <Button Padding="5" VerticalAlignment="Center">
+                    <SymbolIcon>Tag</SymbolIcon>
+                    <Button.Flyout>
+                        <Flyout Placement="Bottom">
+                            <controls:TagEditorFlyoutContent Note="{x:Bind Note}"/>
+                        </Flyout>
+                    </Button.Flyout>
+                </Button>
+                <Button Padding="5"  VerticalAlignment="Center" Command="{x:Bind SaveCommand}">
+                    <SymbolIcon>Save</SymbolIcon>
+                </Button>
+                <Button Padding="5"  VerticalAlignment="Center" Command="{x:Bind SaveCommand}">
+                    <SymbolIcon Symbol="More"/>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" VerticalScrollMode="Auto" HorizontalScrollBarVisibility="Auto" HorizontalScrollMode="Auto" MinZoomFactor="0.333" MaxZoomFactor="3" ZoomMode="Enabled">
+                <!--<controls:RichEditBoxEx Margin="0,0,0,400" AcceptsReturn="True" TabIndex="0" x:Name="EditorTextBox" TextChanged="EditorTextBox_TextChanged" Style="{StaticResource DefaultRichEditBoxStyle}"
+                    ScrollViewer.HorizontalScrollMode="Disabled"
+                    ScrollViewer.VerticalScrollMode="Disabled"
+                    ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                    ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Foreground="White"
+                    FontSize="32">
+                    <controls:RichEditBoxEx.Resources>
+                        <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="Transparent"/>
+                        <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="Transparent"/>
+                    </controls:RichEditBoxEx.Resources>
+                </controls:RichEditBoxEx>-->
+                <getTextEdit:RichTextEditor x:Name="TextEditor">
+                    <getTextEdit:RichTextEditor.ContextFlyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem Click="Undo" Text="Undo" Icon="{helpers:SymbolExIcon Symbol=Undo}"/>
+                            <MenuFlyoutItem Click="Redo" Text="Redo" Icon="{helpers:SymbolExIcon Symbol=Redo}"/>
+                            <editorcontrols:ToggleMenuFlyoutItemEx Text="Bold" Icon="{helpers:SymbolExIcon Symbol=Bold}" StyleStatus="{x:Bind TextEditor.DocumentView.Selection.Bold, Mode=TwoWay}" Padding="5"/>
+                            <editorcontrols:ToggleMenuFlyoutItemEx Text="Italic" Icon="{helpers:SymbolExIcon Symbol=Italic}" StyleStatus="{x:Bind TextEditor.DocumentView.Selection.Italic, Mode=TwoWay}" Padding="5"/>
+                            <editorcontrols:ToggleMenuFlyoutItemEx Text="Underline" Icon="{helpers:SymbolExIcon Symbol=Underline}" StyleStatus="{x:Bind TextEditor.DocumentView.Selection.Underline, Mode=TwoWay}" Padding="5"/>
+                        </MenuFlyout>
+                    </getTextEdit:RichTextEditor.ContextFlyout>
+                </getTextEdit:RichTextEditor>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

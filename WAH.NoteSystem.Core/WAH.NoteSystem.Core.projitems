@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>a6c20c20-fc4a-4a80-92d4-df7b69d2d4c2</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>WAH.NoteSystem.Core</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Extension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JSON\JSONContext.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JSON\NameJSON.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JSON\NoteMetadataJSON.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JSON\NoteSystemMetadataJSON.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JSON\TagJSON.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NoteSystem\NoteSystem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NoteSystem\NoteSystem.Implementation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NoteSystem\NoteSystem.Initializaton.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NoteSystem\NoteSystem.Internal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NoteSystem\NoteSystem.Internal.Implementation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Notes\Note.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Notes\Note.Implementation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Notes\Note.Initialization.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Notes\Note.INotifyPropertyChanged.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Notes\Note.Internal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Notes\Other\NoteData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Notes\Other\NoteVersion.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NotImplemented.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\FileStorageManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\FolderStorageManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\IFileStorage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\IFolderStorage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\ReadOnlyStream.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\SafeFileStorageManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SymbolEx.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tags\Tag.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tags\Tag.Implementation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tags\Tag.Initialization.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tags\Tag.INotifyPropertyChanged.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tags\Tag.Internal.cs" />
+  </ItemGroup>
+</Project>

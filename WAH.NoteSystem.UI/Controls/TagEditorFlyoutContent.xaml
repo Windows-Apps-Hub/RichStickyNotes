@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<StackPanel
+    x:Class="WAH.NoteSystem.UI.Controls.TagEditorFlyoutContent"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WAH.NoteSystem.UI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:helper="using:WAH.NoteSystem.UI.Helpers"
+    xmlns:tag="using:WAH.NoteSystem.Core.Tags"
+    mc:Ignorable="d"
+    Margin="-8"
+    Spacing="8"
+>
+    <ItemsControl ItemsSource="{x:Bind NoteTagOC}">
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <StackPanel Spacing="8" Orientation="Vertical">
+                    <StackPanel.ChildrenTransitions>
+                        <TransitionCollection>
+                            <EntranceThemeTransition IsStaggeringEnabled="True" />
+                            <RepositionThemeTransition IsStaggeringEnabled="True" />
+                        </TransitionCollection>
+                    </StackPanel.ChildrenTransitions>
+                    <StackPanel.Transitions>
+                        <TransitionCollection>
+                            <AddDeleteThemeTransition />
+                        </TransitionCollection>
+                    </StackPanel.Transitions>
+                </StackPanel>
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="local:NoteTag">
+                <CheckBox
+                    IsChecked="{x:Bind HasTag, Mode=TwoWay}"
+                    VerticalContentAlignment="Center"
+                    HorizontalAlignment="Stretch"
+                    Content="{x:Bind Tag}"
+                >
+                    <CheckBox.ContentTemplate>
+                        <DataTemplate x:DataType="tag:Tag">
+                            <local:TagPresenter NoteTag="{x:Bind}"/>
+                        </DataTemplate>
+                    </CheckBox.ContentTemplate>
+                </CheckBox>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
+    <MenuFlyoutSeparator/>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Button Padding="5">
+            <helper:SymbolExFontIcon x:Name="NewTagSymbolIcon" SymbolEx="Tag"/>
+            <Button.Flyout>
+                <Flyout Placement="Bottom"  x:Name="TagIconFlyout">
+                    <local:IconPickerFlyoutControl SelectionChanged="IconSelectionChanged"/>
+                </Flyout>
+            </Button.Flyout>
+        </Button>
+        <TextBox PlaceholderText="New Tag Name" x:Name="NewTagTB" Width="150" Grid.Column="1"  Margin="8,0,0,0" />
+        <Button HorizontalAlignment="Center" Margin="8,0,0,0" Padding="5" Grid.Column="2" Click="Button_Click">
+            <SymbolIcon>Add</SymbolIcon>
+        </Button>
+    </Grid>
+</StackPanel>

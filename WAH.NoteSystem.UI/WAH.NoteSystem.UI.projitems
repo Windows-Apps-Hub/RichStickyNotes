@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>2e4dcad0-5b43-417f-8aa0-7e390aae4f1f</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>WAH.NoteSystem.UI</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ColorPickerEx.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\CustomFlyout.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\IconPickerFlyoutContent.xaml.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\TagEditorFlyoutContent.xaml.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\TagPresenter.xaml.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\TagToggleFlyoutItem.xaml.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Editor\Editor.xaml.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Editor\ToggleButtonEx.xaml.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Editor\ToggleMenuFlyoutItemEx.xaml.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Editor\UIParagraphSettingTemplate.xaml.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\ObservableCollectionMimicker.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\SymbolEx.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NoteEditPage.xaml.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NoteSelectionPage.xaml.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SaveFormatter\GRTKLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)saveformatter\GRTKSaver.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)Controls\IconPickerFlyoutContent.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Controls\TagEditorFlyoutContent.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Controls\TagPresenter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Controls\TagToggleFlyoutItem.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Editor\Editor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Editor\ToggleButtonEx.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Editor\ToggleMenuFlyoutItemEx.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Editor\UIParagraphSettingTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)NoteEditPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)NoteSelectionPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+</Project>
