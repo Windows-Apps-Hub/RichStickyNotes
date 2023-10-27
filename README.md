@@ -6,7 +6,7 @@ A note taking app with simple rich text features with additional gimmics.
 
 ## Screenshots
 
-![image](https://github.com/Windows-Apps-Hub/RichStickyNotes/assets/41405393/342d30d2-9510-4eca-a4b5-b54263ef25af)
+![screenshot](https://github.com/Windows-Apps-Hub/RichStickyNotes/assets/41405393/0ea433dd-47c0-4302-baab-c5ac5f55213a)
 
 ## Libraries
 
